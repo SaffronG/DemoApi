@@ -1,0 +1,22 @@
+﻿@page "/weather"
+@inject HttpClient Http
+
+<h3>My Test</h3>
+<button @onclick="CallApi">Call API</button>
+
+@code {
+    string? result;
+    string? error;
+
+    async Task CallApi()
+    {
+        try
+        {
+            result = await Http.GetStringAsync("weatherforecast");    
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+    }
+}

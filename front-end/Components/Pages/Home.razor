@@ -1,0 +1,22 @@
+﻿@page "/"
+@using FrontEnd.Components.Pages
+@inherits HomeBase
+
+<h2>Testing Razor-style Layouts</h2>
+
+@if (messages == null) {
+    <p>Loading logs from server...</p>
+} else {
+    @foreach (var msg in messages.log_messages) {
+        <div style="border-bottom: 1px solid #ccc; margin-bottom: 10px;">
+            <strong>@msg.Date.ToString() - @msg.User</strong>
+            <ul>
+                @if (msg.MessageBody != null) {
+                    @foreach (var line in msg.MessageBody) {
+                        <li>@line</li>
+                    }
+                }
+            </ul>
+        </div>
+    }
+}
