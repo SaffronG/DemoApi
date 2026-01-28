@@ -41,9 +41,9 @@ public partial class CrudModal : ComponentBase {
 
     protected async Task DeleteItem(Guid id) {
         try {
+            error = null;
             await Client.DeleteAsync($"Test/items/{id}");
             await LoadItems();
-            error = null;
         } catch (Exception e) {
             error = e.Message;
         }
@@ -61,7 +61,6 @@ public partial class CrudModal : ComponentBase {
         selectedItem = item;
         modalName = item.Name;
         showModal = true;
-        await SaveItem();
     }
 
     protected async Task OpenDeleteModal(Item item) {
