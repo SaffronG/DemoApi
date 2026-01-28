@@ -1,0 +1,4 @@
+namespace Modals.ItemModals;
+
+public record Items(List<Item> items);
+public record Item(Guid Id, string Name);

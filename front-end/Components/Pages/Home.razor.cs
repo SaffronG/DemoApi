@@ -26,4 +26,10 @@ public class HomeBase : ComponentBase {
             Console.WriteLine($"Error fetching logs: {ex.Message}");
         }
     }
+    protected async Task GetLogs() {
+        
+    }
+    protected async Task GetUptime() {
+
+    }
 }

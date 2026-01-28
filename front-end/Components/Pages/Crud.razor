@@ -1,0 +1,71 @@
+@page "/Crud"
+
+@inherits CrudModal
+
+@inject HttpClient Http
+
+<h3>Simple API CRUD Table</h3>
+
+<button @onclick="OpenCreateModal">Add New Item</button>
+
+@if (loading)
+{
+    <p><em>Loading...</em></p>
+}
+else if (error != null)
+{
+    <p style="color:red">@error</p>
+}
+else
+{
+    <table border="1" cellpadding="6" cellspacing="0" style="margin-top:10px;">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in items)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>
+                        <button @onclick="() => OpenEditModal(item)">Edit</button>
+                        <button @onclick="() => DeleteItem(item.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (showModal)
+{
+    <div style="
+            position:fixed;
+            top:0; left:0;
+            width:100%; height:100%;
+            background:rgba(0,0,0,0.4);">
+
+        <div style="
+                background:white;
+                width:300px;
+                margin:100px auto;
+                padding:15px;
+                border-radius:4px;">
+
+            <h4>@(isEditing ? "Edit Item" : "Create Item")</h4>
+
+            <div style="margin-bottom:10px;">
+                <label>Name:</label><br />
+                <input @bind="modalName" />
+            </div>
+
+            <button @onclick="SaveItem">Save</button>
+            <button @onclick="CloseModal">Cancel</button>
+        </div>
+    </div>
+}
